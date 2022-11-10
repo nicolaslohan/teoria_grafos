@@ -13,7 +13,7 @@ class MeuGrafo(GrafoMatrizAdjacenciaDirecionado):
         for v in range(len(self.vertices)):
             for h in range(len(self.vertices)):
                 par = f'{self.vertices[v]}-{self.vertices[h]}'
-                if v != h and par not in vna and par[::-1] not in vna:
+                if v != h and par not in vna and len(self.matriz[v][h]) < 1:
                     vna.add(par)
         return vna
 
@@ -41,7 +41,7 @@ class MeuGrafo(GrafoMatrizAdjacenciaDirecionado):
 
         for i in range(len(self.vertices)):
             for j in range(len(self.vertices)):
-                if str(self.vertices[i]) == V:
+                if str(self.vertices[i]) == V or str(self.vertices[j]) == V:
                     if i == j:
                         g += 2*len(self.matriz[i][j])
                     else:
@@ -93,5 +93,29 @@ class MeuGrafo(GrafoMatrizAdjacenciaDirecionado):
         '''
         pass
 
-    def dijkstra_drone(self, vi, vf, carga:int, carga_max:int, pontos_recarga:list()):
-        pass
+    def dijkstra(self, vi, vf):
+        '''
+        Provê o menor caminho entre dois vértices no grafo.
+        :param vi: Vértice inicial
+        :param vf: Vértice final
+        :return: Lista contendo o menor caminho entre os dois vértices
+        :raises: VerticeInvalidoException se algum dos vértices não existe no grafo
+        '''
+        if not self.existe_rotulo_vertice(vi) or not self.existe_rotulo_vertice(vf):
+            raise VerticeInvalidoError
+
+        caminho = []
+        pred = {} #predecessor do vértice
+        visitados = {}
+        beta = {}  #tamanho do caminho até o vértice
+        for v in self.vertices:
+            visitados[v.rotulo] = 0
+            pred[v.rotulo] = 0
+            beta[v.rotulo] = 0
+        visitados[vi] = 1
+        w = vi
+        """while w != vf:
+            pass
+        if len(visitados) != 0:
+            return caminho"""
+        return print(visitados)

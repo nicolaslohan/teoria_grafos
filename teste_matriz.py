@@ -1,4 +1,4 @@
-from meu_grafo_matriz_adj_nao_dir import MeuGrafo
+from meu_grafo_matriz_adj_dir import MeuGrafo
 
 grafo = MeuGrafo()
 grafo_paraiba = MeuGrafo()
@@ -46,20 +46,9 @@ vertices = {}
 for v in g_l1.vertices:
     vertices[str(v)] = g_l1.vertices.index(v)
 
-"""for j in range(len(vertices)):
-    for i in range(len(vertices)):
-        if len(grafo_paraiba.matriz[j][i]) == 2:
-            print("Tem Paralela")"""
-
-"""for j in range(len(vertices)):
-    if len(grafo_paraiba.matriz[j][j]) > 0:
-        print("Tem laço")
-else:
-    print("Não tem laço")
-    """
-
-"""for i in range(len(vertices)):
-    for j in range(len(vertices)):
-        print(g_l1.matriz[i][j])"""
 print(g_l1.grau("A"))
 print(g_l1.arestas_sobre_vertice("A"))
+
+#print(list(vertices.keys())[list(vertices.values()).index(0)])
+
+g_l1.dijkstra("A", "B")

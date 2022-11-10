@@ -280,14 +280,14 @@ class TestGrafo(unittest.TestCase):
         self.assertNotEqual(self.g_p, self.g_p4)
 
     def test_vertices_nao_adjacentes(self):
-        self.assertEqual(set(self.g_p.vertices_nao_adjacentes()),
+        self.assertEqual(self.g_p.vertices_nao_adjacentes(),
                          {'J-E', 'J-P', 'J-M', 'J-T', 'J-Z', 'C-J', 'C-T', 'C-Z', 'C-M', 'C-P', 'E-C', 'E-J', 'E-P',
                           'E-M', 'E-T', 'E-Z', 'P-J', 'P-E', 'P-M', 'P-T', 'P-Z', 'M-J', 'M-E', 'M-P', 'M-Z', 'T-J',
                           'T-M', 'T-E', 'T-P', 'Z-J', 'Z-C', 'Z-E', 'Z-P', 'Z-M', 'Z-T'})
 
-        self.assertEqual(set(self.g_c.vertices_nao_adjacentes()), {'C-J', 'C-E', 'C-P', 'E-J', 'E-P', 'P-J'})
-        self.assertEqual(self.g_c3.vertices_nao_adjacentes(), [])
-        self.assertEqual(set(self.g_e.vertices_nao_adjacentes()),
+        self.assertEqual(self.g_c.vertices_nao_adjacentes(), {'C-J', 'C-E', 'C-P', 'E-J', 'E-P', 'P-J'})
+        self.assertEqual(self.g_c3.vertices_nao_adjacentes(), set())
+        self.assertEqual(self.g_e.vertices_nao_adjacentes(),
                          {'A-D', 'A-E', 'B-A', 'B-C', 'B-D', 'B-E', 'C-E', 'D-C', 'D-A', 'E-D', 'E-C'})
 
     def test_ha_laco(self):
@@ -349,6 +349,8 @@ class TestGrafo(unittest.TestCase):
         with self.assertRaises(VerticeInvalidoError):
             self.g_p.arestas_sobre_vertice('A')
         self.assertEqual(set(self.g_e.arestas_sobre_vertice('D')), {'5', '6', '7', '8'})
+
+
 
     def test_warshall(self):
         self.assertEqual(self.g_p.warshall(), self.g_p_m)

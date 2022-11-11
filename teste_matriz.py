@@ -51,4 +51,10 @@ print(g_l1.arestas_sobre_vertice("A"))
 
 #print(list(vertices.keys())[list(vertices.values()).index(0)])
 
-g_l1.dijkstra("A", "B")
+#g_l1.dijkstra("A", "B")
+
+for v in range(len(grafo_paraiba.vertices)):
+    for h in range(len(grafo_paraiba.vertices)):
+        if (len(grafo_paraiba.matriz[v][h])) > 0:
+            for a in range(len(grafo_paraiba.matriz[v][h])):
+                print(f'{grafo_paraiba.vertices[v]} - {grafo_paraiba.vertices[h]} -> {grafo_paraiba.matriz[v][h][a].peso}')

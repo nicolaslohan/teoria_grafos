@@ -104,18 +104,23 @@ class MeuGrafo(GrafoMatrizAdjacenciaDirecionado):
         if not self.existe_rotulo_vertice(vi) or not self.existe_rotulo_vertice(vf):
             raise VerticeInvalidoError
 
-        caminho = []
         pred = {} #predecessor do vértice
         visitados = {}
         beta = {}  #tamanho do caminho até o vértice
         for v in self.vertices:
-            visitados[v.rotulo] = 0
+            if v.rotulo == vi:
+                visitados[v.rotulo] = 1
+                beta[v.rotulo] = 0
+            else:
+                visitados[v.rotulo] = 0
+                beta[v.rotulo] = float('inf')
             pred[v.rotulo] = 0
-            beta[v.rotulo] = 0
-        visitados[vi] = 1
         w = vi
-        """while w != vf:
-            pass
-        if len(visitados) != 0:
-            return caminho"""
-        return print(visitados)
+        for v in range(len(self.vertices)):
+            for h in range(len(self.vertices)):
+                if (len(self.matriz[v][h])) > 0 and self.vertices[v] == w: #percorrendo cada aresta existente
+                    for a in range(len(self.matriz[v][h])):
+                        v2 = self.matriz[v][h][a].v2.rotulo
+                        calc = v2
+
+        return print(beta)

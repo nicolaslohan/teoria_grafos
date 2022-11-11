@@ -116,11 +116,27 @@ class MeuGrafo(GrafoMatrizAdjacenciaDirecionado):
                 beta[v.rotulo] = float('inf')
             pred[v.rotulo] = 0
         w = vi
+
         for v in range(len(self.vertices)):
             for h in range(len(self.vertices)):
-                if (len(self.matriz[v][h])) > 0 and self.vertices[v] == w: #percorrendo cada aresta existente
-                    for a in range(len(self.matriz[v][h])):
+                if (len(self.matriz[v][h])) > 0 and self.vertices[v].rotulo == w or self.vertices[h].rotulo == w: #percorrendo cada aresta existente
+                    for a in self.matriz[v][h]:
                         v2 = self.matriz[v][h][a].v2.rotulo
-                        calc = v2
-
-        return print(beta)
+                        if visitados[v2] == 0:
+                            calc = beta[w] + self.matriz[v][h][a].peso
+                            if calc < beta[v2]:
+                                beta[v2] = calc
+                                pred[v2] = w
+                            visitados[v2] = 1
+                            w = v2
+                            if w == vf:
+                                caminho = []
+                                aux = w
+                                for i in reversed(visitados):
+                                    if i == aux:
+                                        caminho.append(i)
+                                        aux = pred[i]
+                                return caminho[::-1]
+                        else:
+                            w = pred[v2]
+        return pred

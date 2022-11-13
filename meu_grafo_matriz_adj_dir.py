@@ -117,26 +117,43 @@ class MeuGrafo(GrafoMatrizAdjacenciaDirecionado):
             pred[v.rotulo] = 0
         w = vi
 
-        for v in range(len(self.vertices)):
-            for h in range(len(self.vertices)):
-                if (len(self.matriz[v][h])) > 0 and self.vertices[v].rotulo == w or self.vertices[h].rotulo == w: #percorrendo cada aresta existente
-                    for a in self.matriz[v][h]:
-                        v2 = self.matriz[v][h][a].v2.rotulo
-                        if visitados[v2] == 0:
-                            calc = beta[w] + self.matriz[v][h][a].peso
-                            if calc < beta[v2]:
-                                beta[v2] = calc
-                                pred[v2] = w
-                            visitados[v2] = 1
-                            w = v2
-                            if w == vf:
-                                caminho = []
-                                aux = w
-                                for i in reversed(visitados):
-                                    if i == aux:
-                                        caminho.append(i)
-                                        aux = pred[i]
-                                return caminho[::-1]
-                        else:
-                            w = pred[v2]
-        return pred
+        return self.aux_dijkstra(vi, w, vf, pred, beta, visitados)
+
+    def aux_dijkstra(self, vi,  w, vf, pred, beta, visitados):
+
+        for asv in self.arestas_sobre_vertice(w):
+            for v in range(len(self.vertices)):
+                for h in range(len(self.vertices)):
+                    if v != h:
+                        for a in self.matriz[v][h]:
+                            if a == asv:
+                                if self.vertices[v].rotulo == w and visitados[self.vertices[h].rotulo] == 0:
+                                    v2 = self.vertices[h].rotulo
+                                    calc = beta[w] + self.matriz[v][h][a].peso
+                                    if beta[v2] > calc:
+                                        beta[v2] = calc
+                                        pred[v2] = w
+        not_visted_beta = {}
+        for vis in visitados:
+            if vis != vi:
+                if visitados[vis] == 0:
+                    not_visted_beta[vis] = beta[vis]
+
+        menor = min(not_visted_beta, key=not_visted_beta.get)
+        equal = len(list(set(list(beta.values())))) == 1
+        if equal:
+            return "Não há caminho entre os vértices."
+        elif visitados[menor] == 0:
+            visitados[menor] = 1
+            w = menor
+            if w == vf:
+                if pred[w] == 0:
+                    return "Não há caminho entre os vértices."
+                caminho = []
+                atual = w
+                for i in range(len(pred)):
+                    caminho.append(atual)
+                    if pred[atual] == 0:
+                        return caminho[::-1]
+                    atual = pred[atual]
+            return self.aux_dijkstra(vi, w, vf, pred, beta, visitados)

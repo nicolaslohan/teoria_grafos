@@ -498,3 +498,4 @@ class TestGrafo(unittest.TestCase):
         self.assertEqual(self.g_p.dijkstra("J", "M"), "Não há caminho entre os vértices.")
         self.assertEqual(self.g_p.dijkstra("J", "T"), "Não há caminho entre os vértices.")
         self.assertEqual(self.grafo_drone.dijkstra("S", "J"), "Não há caminho entre os vértices.")
+        self.assertEqual(self.grafo_aula.dijkstra("A", "A"), "Não é possível fazer Dijkstra de um vértice para ele mesmo.")

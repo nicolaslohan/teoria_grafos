@@ -101,6 +101,8 @@ class MeuGrafo(GrafoMatrizAdjacenciaDirecionado):
         :return: Lista contendo o menor caminho entre os dois vértices
         :raises: VerticeInvalidoException se algum dos vértices não existe no grafo
         '''
+        if vi == vf:
+            return "Não é possível fazer Dijkstra de um vértice para ele mesmo."
         if not self.existe_rotulo_vertice(vi) or not self.existe_rotulo_vertice(vf):
             raise VerticeInvalidoError
 

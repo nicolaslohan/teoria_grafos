@@ -65,12 +65,25 @@ print(g_l1.arestas_sobre_vertice("A"))
 
 # g_l1.dijkstra("A", "B")
 
-for v in range(len(grafo.vertices)):
+"""for v in range(len(grafo.vertices)):
     for h in range(len(grafo.vertices)):
         if (len(grafo.matriz[v][h])) > 0:
             for a in grafo.matriz[v][h]:
                 print(f'{grafo.matriz[v][h][a]}')
-
-print("\n\n")
+"""
+#print("\n\n")
 #print(grafo.arestas_sobre_vertice("A"))
-print(grafo_paraiba.dijkstra("J", "M"))
+#print(grafo_paraiba.dijkstra("J", "M"))
+print(grafo.matriz)
+print(grafo.warshall())
+
+def constroi_grafo(grafo):
+    ordem = len(grafo.vertices)
+    m = list()
+    for i in range(ordem):
+        m.append(list())
+        for j in range(ordem):
+            m[i].append(0)
+    return m
+
+print(constroi_grafo(grafo))

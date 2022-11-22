@@ -91,7 +91,22 @@ class MeuGrafo(GrafoMatrizAdjacenciaDirecionado):
         Provê a matriz de alcançabilidade de Warshall do grafo
         :return: Uma lista de listas que representa a matriz de alcançabilidade de Warshall associada ao grafo
         '''
-        pass
+        warshallM = []
+        for i in range(len(self.vertices)):
+            aux = []
+            for j in range(len(self.vertices)):
+                if len(self.matriz[i][j]) > 0:
+                    aux.append(1)
+                else:
+                    aux.append(0)
+            warshallM.append(aux)
+
+        for i in range(len(self.vertices)):
+            for j in range(len(self.vertices)):
+                if warshallM[j][i] == 1:
+                    for k in range(len(self.vertices)):
+                        warshallM[j][k] = max(warshallM[j][k], warshallM[i][k])
+        return warshallM
 
     def dijkstra(self, vi, vf):
         '''
@@ -142,10 +157,10 @@ class MeuGrafo(GrafoMatrizAdjacenciaDirecionado):
                     not_visted_beta[vis] = beta[vis]
 
         menor = min(not_visted_beta, key=not_visted_beta.get)
-        equal = len(list(set(list(beta.values())))) == 1
-        if equal:
-            return "Não há caminho entre os vértices."
-        elif visitados[menor] == 0:
+        #equal = len(list(set(list(beta.values())))) == 1
+        #if equal:
+        #    return "Não há caminho entre os vértices."
+        if visitados[menor] == 0:
             visitados[menor] = 1
             w = menor
             if w == vf:

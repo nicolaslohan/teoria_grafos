@@ -342,6 +342,22 @@ class TestGrafo(unittest.TestCase):
             self.g_e_m[3][i] = 1
             self.g_e_m[4][i] = 1
 
+        self.grafoaula_warshall = self.constroi_matriz(self.grafo_aula)
+        self.grafoaula_warshall[0][1] = 1
+        self.grafoaula_warshall[0][2] = 1
+        self.grafoaula_warshall[0][3] = 1
+        self.grafoaula_warshall[0][4] = 1
+        self.grafoaula_warshall[0][5] = 1
+        self.grafoaula_warshall[1][3] = 1
+        self.grafoaula_warshall[1][4] = 1
+        self.grafoaula_warshall[1][5] = 1
+        self.grafoaula_warshall[2][3] = 1
+        self.grafoaula_warshall[2][4] = 1
+        self.grafoaula_warshall[2][5] = 1
+        self.grafoaula_warshall[3][4] = 1
+        self.grafoaula_warshall[3][5] = 1
+        self.grafoaula_warshall[4][5] = 1
+
         # Grafos desconexos
         self.g_dijkstra = MeuGrafo()
         self.g_dijkstra.adiciona_vertice("A")
@@ -483,9 +499,9 @@ class TestGrafo(unittest.TestCase):
         self.assertEqual(set(self.g_e.arestas_sobre_vertice('D')), {'5', '6', '7', '8'})
 
     def test_warshall(self):
-        #self.assertEqual(self.g_p.warshall(), self.g_p_m)
-        #self.assertEqual(self.g_e.warshall(), self.g_e_m)
-        pass
+        self.assertEqual(self.g_p.warshall(), self.g_p_m)
+        self.assertEqual(self.g_e.warshall(), self.g_e_m)
+        self.assertEqual(self.grafo_aula.warshall(), self.grafoaula_warshall)
 
     def test_dijkstra(self):
         self.assertEqual(self.grafo_aula.dijkstra("A", "F"), ['A', 'B', 'D', 'E', 'F'])

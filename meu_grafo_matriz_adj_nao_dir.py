@@ -94,3 +94,29 @@ class MeuGrafo(GrafoMatrizAdjacenciaNaoDirecionado):
             if self.grau(str(v)) != (len(self.vertices)-1):
                 return False
         return True
+
+
+    def minimum_spanning_tree_prim(self):
+        '''
+        :return: Mínima árvore geradora do grafo pelo algoritmo modificado de Prim.
+        '''
+
+        # loop de arestas para pegar a de menor peso, adicionar a arvore e indicar o último vértice visitado
+        # já adiciona uma aresta e dois vértices a arvore, os demais vertices permanecem não visitados
+
+        # loop de vértices
+        # loop de arestas sob vertice
+        # verificar se a aresta existe e o vertice adjascente existem
+
+        pass
+
+    def minimum_spanning_tree_kruskal(self, V):
+        '''
+        :return: Mínima árvore geradora do grafo pelo algoritmo modificado de Kruskal.
+        :param V: Vértice de início.
+        '''
+
+        if not self.existe_rotulo_vertice(V):
+            raise VerticeInvalidoError
+
+        pass

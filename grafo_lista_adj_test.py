@@ -29,6 +29,22 @@ class TestGrafo(unittest.TestCase):
         self.g_p.adiciona_aresta('a8', 'M', 'T')
         self.g_p.adiciona_aresta('a9', 'T', 'Z')
 
+        # grafo da paraíba Kruskall
+        self.g_p_kruskall = MeuGrafo()
+        self.g_p_kruskall.adiciona_vertice("J")
+        self.g_p_kruskall.adiciona_vertice("C")
+        self.g_p_kruskall.adiciona_vertice("E")
+        self.g_p_kruskall.adiciona_vertice("P")
+        self.g_p_kruskall.adiciona_vertice("M")
+        self.g_p_kruskall.adiciona_vertice("T")
+        self.g_p_kruskall.adiciona_vertice("Z")
+        self.g_p_kruskall.adiciona_aresta('a1', 'J', 'C')
+        self.g_p_kruskall.adiciona_aresta('a2', 'C', 'E')
+        self.g_p_kruskall.adiciona_aresta('a4', 'P', 'C')
+        self.g_p_kruskall.adiciona_aresta('a6', 'T', 'C')
+        self.g_p_kruskall.adiciona_aresta('a7', 'M', 'C')
+        self.g_p_kruskall.adiciona_aresta('a9', 'T', 'Z')
+
         # Clone do Grafo da Paraíba para ver se o método equals está funcionando
         self.g_p2 = MeuGrafo()
         self.g_p2.adiciona_vertice("J")
@@ -105,6 +121,77 @@ class TestGrafo(unittest.TestCase):
         self.g_p_sem_paralelas.adiciona_aresta('a6', 'M', 'T')
         self.g_p_sem_paralelas.adiciona_aresta('a7', 'T', 'Z')
 
+        #grafo com pesos
+        self.g2 = MeuGrafo()
+        self.g2.adiciona_vertice("A")
+        self.g2.adiciona_vertice("B")
+        self.g2.adiciona_vertice("C")
+        self.g2.adiciona_vertice("D")
+        self.g2.adiciona_vertice("E")
+        self.g2.adiciona_aresta("a1", "A", "B", 1)
+        self.g2.adiciona_aresta("a2", "A", "E", 3)
+        self.g2.adiciona_aresta("a3", "A", "D", 3)
+        self.g2.adiciona_aresta("a4", "B", "D", 4)
+        self.g2.adiciona_aresta("a5", "B", "C", 3)
+        self.g2.adiciona_aresta("a6", "D", "C", 2)
+        self.g2.adiciona_aresta("a7", "D", "E", 2)
+
+        #g2 Prim
+        self.g2_prim = MeuGrafo()
+        self.g2_prim.adiciona_vertice("A")
+        self.g2_prim.adiciona_vertice("B")
+        self.g2_prim.adiciona_vertice("C")
+        self.g2_prim.adiciona_vertice("D")
+        self.g2_prim.adiciona_vertice("E")
+        self.g2_prim.adiciona_aresta("a1", "A", "B", 1)
+        self.g2_prim.adiciona_aresta("a5", "B", "C", 3)
+        self.g2_prim.adiciona_aresta("a6", "D", "C", 2)
+        self.g2_prim.adiciona_aresta("a7", "D", "E", 2)
+
+        #g3
+        self.g3 = MeuGrafo()
+        self.g3.adiciona_vertice("A")
+        self.g3.adiciona_vertice("B")
+        self.g3.adiciona_vertice("C")
+        self.g3.adiciona_vertice("D")
+        self.g3.adiciona_vertice("E")
+        self.g3.adiciona_vertice("F")
+        self.g3.adiciona_aresta("a1", "A", "B", 1)
+        self.g3.adiciona_aresta("a2", "A", "C", 2)
+        self.g3.adiciona_aresta("a3", "B", "D", 2)
+        self.g3.adiciona_aresta("a4", "D", "C", 1)
+        self.g3.adiciona_aresta("a5", "C", "F", 3)
+        self.g3.adiciona_aresta("a6", "B", "E", 2)
+        self.g3.adiciona_aresta("a7", "E", "F", 1)
+
+        #g3 Prim
+        self.g3_prim = MeuGrafo()
+        self.g3_prim.adiciona_vertice("A")
+        self.g3_prim.adiciona_vertice("B")
+        self.g3_prim.adiciona_vertice("C")
+        self.g3_prim.adiciona_vertice("D")
+        self.g3_prim.adiciona_vertice("E")
+        self.g3_prim.adiciona_vertice("F")
+        self.g3_prim.adiciona_aresta("a1", "A", "B", 1)
+        self.g3_prim.adiciona_aresta("a3", "B", "D", 2)
+        self.g3_prim.adiciona_aresta("a4", "D", "C", 1)
+        self.g3_prim.adiciona_aresta("a5", "C", "F", 3)
+        self.g3_prim.adiciona_aresta("a7", "E", "F", 1)
+
+        #g3 Kruskall
+        self.g3_kruskall = MeuGrafo()
+        self.g3_kruskall.adiciona_vertice("A")
+        self.g3_kruskall.adiciona_vertice("B")
+        self.g3_kruskall.adiciona_vertice("C")
+        self.g3_kruskall.adiciona_vertice("D")
+        self.g3_kruskall.adiciona_vertice("E")
+        self.g3_kruskall.adiciona_vertice("F")
+        self.g3_kruskall.adiciona_aresta("a1", "A", "B", 1)
+        self.g3_kruskall.adiciona_aresta("a2", "A", "C", 2)
+        self.g3_kruskall.adiciona_aresta("a4", "D", "C", 1)
+        self.g3_kruskall.adiciona_aresta("a6", "B", "E", 2)
+        self.g3_kruskall.adiciona_aresta("a7", "E", "F", 1)
+
         # Grafos completos
         self.g_c = MeuGrafo()
         self.g_c.adiciona_vertice("J")
@@ -117,6 +204,40 @@ class TestGrafo(unittest.TestCase):
         self.g_c.adiciona_aresta('a4', 'E', 'C')
         self.g_c.adiciona_aresta('a5', 'P', 'C')
         self.g_c.adiciona_aresta('a6', 'P', 'E')
+
+        #g_c com pesos
+        self.g_c_pesos = MeuGrafo()
+        self.g_c_pesos.adiciona_vertice("J")
+        self.g_c_pesos.adiciona_vertice("C")
+        self.g_c_pesos.adiciona_vertice("E")
+        self.g_c_pesos.adiciona_vertice("P")
+        self.g_c_pesos.adiciona_aresta('a1', 'J', 'C', 1)
+        self.g_c_pesos.adiciona_aresta('a2', 'J', 'E', 2)
+        self.g_c_pesos.adiciona_aresta('a3', 'J', 'P', 2)
+        self.g_c_pesos.adiciona_aresta('a4', 'E', 'C', 1)
+        self.g_c_pesos.adiciona_aresta('a5', 'P', 'C', 2)
+        self.g_c_pesos.adiciona_aresta('a6', 'P', 'E', 1)
+
+        #grafo completo Kruskall
+        self.g_c_kruskall = MeuGrafo()
+        self.g_c_kruskall.adiciona_vertice("J")
+        self.g_c_kruskall.adiciona_vertice("C")
+        self.g_c_kruskall.adiciona_vertice("E")
+        self.g_c_kruskall.adiciona_vertice("P")
+        self.g_c_kruskall.adiciona_aresta('a1', 'J', 'C', 1)
+        self.g_c_kruskall.adiciona_aresta('a4', 'E', 'C', 1)
+        self.g_c_kruskall.adiciona_aresta('a6', 'P', 'E', 1)
+
+        #grafo completo Prim
+        self.g_c_prim = MeuGrafo()
+        self.g_c_prim.adiciona_vertice("J")
+        self.g_c_prim.adiciona_vertice("C")
+        self.g_c_prim.adiciona_vertice("E")
+        self.g_c_prim.adiciona_vertice("P")
+        self.g_c_prim.adiciona_aresta('a1', 'J', 'C', 1)
+        self.g_c_prim.adiciona_aresta('a4', 'E', 'C', 1)
+        self.g_c_prim.adiciona_aresta('a6', 'P', 'E', 1)
+
 
         self.g_c2 = MeuGrafo()
         self.g_c2.adiciona_vertice("Nina")
@@ -211,7 +332,7 @@ class TestGrafo(unittest.TestCase):
         self.g_p_bfs.adiciona_aresta('a7', 'C', 'M')
         self.g_p_bfs.adiciona_aresta('a9', 'T', 'Z')
 
-        #grafo teste 1
+        # grafo teste 1
         self.grafo_teste = MeuGrafo()
         self.grafo_teste.adiciona_vertice("A")
         self.grafo_teste.adiciona_vertice("B")
@@ -228,7 +349,21 @@ class TestGrafo(unittest.TestCase):
         self.grafo_teste.adiciona_aresta("a7", "C", "E")
         self.grafo_teste.adiciona_aresta("a8", "E", "F")
 
-        #grafo teste dfs D
+        # grafo teste kruskall
+        self.grafo_teste_kruskall = MeuGrafo()
+        self.grafo_teste_kruskall.adiciona_vertice("A")
+        self.grafo_teste_kruskall.adiciona_vertice("B")
+        self.grafo_teste_kruskall.adiciona_vertice("C")
+        self.grafo_teste_kruskall.adiciona_vertice("D")
+        self.grafo_teste_kruskall.adiciona_vertice("E")
+        self.grafo_teste_kruskall.adiciona_vertice("F")
+        self.grafo_teste_kruskall.adiciona_aresta("a1", "A", "B")
+        self.grafo_teste_kruskall.adiciona_aresta("a2", "A", "D")
+        self.grafo_teste_kruskall.adiciona_aresta("a3", "B", "C")
+        self.grafo_teste_kruskall.adiciona_aresta("a6", "D", "E")
+        self.grafo_teste_kruskall.adiciona_aresta("a8", "E", "F")
+
+        # grafo teste dfs D
         self.grafo_teste_dfs = MeuGrafo()
         self.grafo_teste_dfs.adiciona_vertice("A")
         self.grafo_teste_dfs.adiciona_vertice("B")
@@ -242,7 +377,7 @@ class TestGrafo(unittest.TestCase):
         self.grafo_teste_dfs.adiciona_aresta("a7", "C", "E")
         self.grafo_teste_dfs.adiciona_aresta("a8", "E", "F")
 
-        #grafo teste bfs D
+        # grafo teste bfs D
         self.grafo_teste_bfs = MeuGrafo()
         self.grafo_teste_bfs.adiciona_vertice("A")
         self.grafo_teste_bfs.adiciona_vertice("B")
@@ -374,9 +509,6 @@ class TestGrafo(unittest.TestCase):
         self.assertEqual(self.g_p.bfs("J"), self.g_p_bfs)
         self.assertEqual(self.grafo_teste.bfs("D"), self.grafo_teste_bfs)
 
-    def test_ha_ciclo(self):
-        self.assertEqual(self.g_p.ha_ciclo(), ['C', 'a2', 'E', 'E', 'a3', 'C'])
-
     def test_conexo(self):
         self.assertTrue(self.grafo_teste.conexo())
         self.assertTrue(self.g_p.conexo())
@@ -386,3 +518,13 @@ class TestGrafo(unittest.TestCase):
         self.assertFalse(self.g_l2.conexo())
         self.assertFalse(self.g_l3.conexo())
         self.assertFalse(self.g_d.conexo())
+
+    def test_prim(self):
+        self.assertEqual(self.g2.mst_prim(), self.g2_prim)
+        self.assertEqual(self.g3.mst_prim(), self.g3_prim)
+        self.assertEqual(self.g_c_pesos.mst_prim(), self.g_c_prim)
+
+    def test_kruskall(self):
+        self.assertEqual(self.grafo_teste.mst_kruskal("A"), self.grafo_teste_kruskall)
+        self.assertEqual(self.g_p.mst_kruskal("J"), self.g_p_kruskall)
+        self.assertEqual(self.g3.mst_kruskal("A"), self.g3_kruskall)

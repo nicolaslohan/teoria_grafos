@@ -1,3 +1,5 @@
+from math import inf
+
 from bibgrafo.grafo_lista_adjacencia import GrafoListaAdjacencia
 from bibgrafo.grafo_errors import *
 
@@ -310,3 +312,97 @@ class MeuGrafo(GrafoListaAdjacencia):
             return True
         else:
             return False
+
+    def mst_prim(self):
+        '''
+        :return: Mínima árvore geradora do grafo pelo algoritmo modificado de Prim.
+        '''
+
+        prim = MeuGrafo()
+        teste = self.ordenar()
+        test1 = teste[0]
+        proximo = self.arestas[test1].v1.rotulo
+        visitados = []
+        prim.adiciona_vertice(proximo)
+        while True:
+            if len(self.vertices) == len(prim.vertices):
+                break
+            sobre = self.arestas_sobre_vertice(proximo)
+            menor = inf
+            menor_aresta = ''
+            for a in sobre:
+                if self.arestas[a].peso <= menor:
+                    if not prim.existe_rotulo_vertice(self.oposto(proximo, self.arestas[a])):
+                        menor_aresta = self.arestas[a]
+                        menor = self.arestas[a].peso
+            visitados.append(menor_aresta)
+            if menor_aresta.v1.rotulo == proximo:
+                proximo = menor_aresta.v2.rotulo
+            else:
+                proximo = menor_aresta.v1.rotulo
+            if not prim.existe_rotulo_vertice(proximo):
+                prim.adiciona_vertice(proximo)
+                prim.adiciona_aresta(menor_aresta)
+        return prim
+
+    def ordenar(self):
+        ordenada = []
+        menor = inf
+        for a in self.arestas:
+            if self.arestas[a].peso <= menor and not a in ordenada:
+                menor = self.arestas[a].peso
+        while len(ordenada) < len(self.arestas):
+            for a in self.arestas:
+                if self.arestas[a].peso == menor:
+                    ordenada.append(a)
+            menor += 1
+        return ordenada
+
+    def oposto(self, V, a):
+        if a.v1.rotulo == V:
+            V = a.v2.rotulo
+            return V
+        else:
+            V = a.v1.rotulo
+            return V
+
+    def mst_kruskal(self, V):
+        '''
+        :return: Mínima árvore geradora do grafo pelo algoritmo modificado de Kruskal.
+        :param V: Vértice de início.
+        '''
+
+        if not self.existe_rotulo_vertice(V):
+            raise VerticeInvalidoError
+
+        arvore_kruskall = MeuGrafo()
+        fila_prioridade = self.bucket_sort_kruskall()
+        for v in self.vertices:
+            arvore_kruskall.adiciona_vertice(v.rotulo)
+
+        for i in range(len(fila_prioridade)):
+            for a in fila_prioridade[i]:
+                aresta = self.arestas[a]
+                kruskall_dfs = arvore_kruskall.dfs(aresta.v1.rotulo)
+
+                if kruskall_dfs.existe_rotulo_vertice(aresta.v1.rotulo) and kruskall_dfs.existe_rotulo_vertice(
+                        aresta.v2.rotulo):
+                    pass
+                else:
+                    arvore_kruskall.adiciona_aresta(aresta)
+
+        return arvore_kruskall
+
+    def bucket_sort_kruskall(self):
+        lista_pesos = []
+        for a in self.arestas:
+            if not self.arestas[a].peso in lista_pesos:
+                lista_pesos.append(self.arestas[a].peso)
+        lista_pesos.sort()
+        bucket = list()
+        for i in range(len(lista_pesos)):
+            bucket.append([])
+            for a in self.arestas:
+                if self.arestas[a].peso == lista_pesos[i]:
+                    bucket[i].append(a)
+        return bucket
